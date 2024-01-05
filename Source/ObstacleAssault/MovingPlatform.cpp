@@ -2,6 +2,7 @@
 
 
 #include "MovingPlatform.h"
+#include "GameFramework/Character.h"
 
 // Sets default values
 AMovingPlatform::AMovingPlatform()
@@ -18,6 +19,24 @@ void AMovingPlatform::BeginPlay()
 	
 	StartLocation = GetActorLocation();
 }
+
+void AMovingPlatform::NotifyHit(UPrimitiveComponent* MyComp, AActor* Other, UPrimitiveComponent* OtherComp,
+ 	bool bSelfMoved, FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit)
+ {
+	if (!EnableKnockback)
+	{
+		return;
+	}
+ 	Super::NotifyHit(MyComp, Other, OtherComp, bSelfMoved, HitLocation, HitNormal, NormalImpulse, Hit);
+
+    const FVector Knockback = -HitNormal * FVector(5000, 5000, 1000);
+	ACharacter* PlayerCharacter = Cast<ACharacter>(Other);
+	
+	if (PlayerCharacter)
+	{
+		PlayerCharacter->LaunchCharacter(Knockback, true, false);
+	}
+ }
 
 // Called every frame
 void AMovingPlatform::Tick(float DeltaTime)

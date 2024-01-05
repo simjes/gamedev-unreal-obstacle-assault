@@ -19,9 +19,13 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
+public:
+	 virtual void NotifyHit(UPrimitiveComponent* MyComp, AActor* Other, UPrimitiveComponent* OtherComp, bool bSelfMoved,
+		 FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit) override;
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	
 
 private:
 	UPROPERTY(EditAnywhere, Category="Moving")
@@ -29,6 +33,9 @@ private:
 
 	UPROPERTY(EditAnywhere, Category="Moving")
 	float MoveDistance = 100;
+
+	UPROPERTY(EditAnywhere, Category="Moving")
+	bool EnableKnockback = false;
 
 	UPROPERTY(EditAnywhere, Category="Rotation")
 	FRotator RotationVelocity;
