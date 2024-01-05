@@ -34,9 +34,12 @@ private:
 	UPROPERTY(EditAnywhere, Category="Moving")
 	float MoveDistance = 100;
 
-	UPROPERTY(EditAnywhere, Category="Moving")
+	UPROPERTY(EditAnywhere, Category="Knockback")
 	bool EnableKnockback = false;
 
+	UPROPERTY(EditAnywhere, Category="Knockback")
+	FVector KnockbackVelocity = FVector(5000, 5000, 2000);
+	
 	UPROPERTY(EditAnywhere, Category="Rotation")
 	FRotator RotationVelocity;
 

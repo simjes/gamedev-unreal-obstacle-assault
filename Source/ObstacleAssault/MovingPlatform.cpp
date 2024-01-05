@@ -29,7 +29,7 @@ void AMovingPlatform::NotifyHit(UPrimitiveComponent* MyComp, AActor* Other, UPri
 	}
  	Super::NotifyHit(MyComp, Other, OtherComp, bSelfMoved, HitLocation, HitNormal, NormalImpulse, Hit);
 
-    const FVector Knockback = -HitNormal * FVector(5000, 5000, 1000);
+    const FVector Knockback = -HitNormal * KnockbackVelocity;
 	ACharacter* PlayerCharacter = Cast<ACharacter>(Other);
 	
 	if (PlayerCharacter)
